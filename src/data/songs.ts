@@ -1,0 +1,58 @@
+import type { Song } from "../types/songType";
+
+export const songs: Song[] = [
+  {
+    id: 1,
+    title: "french christmas patapan intro",
+    artist: "pixabay",
+    cover: "/386-400x400.jpg",
+    audio: "/audio/a-french-christmas-patapan-intro-125325.mp3",
+    duration: 222,
+    genre: "Classic",
+  },
+  {
+    id: 2,
+    title: "black box legendary",
+    artist: "pixabay",
+    cover: "/586-400x400.jpg",
+    audio: "/audio/black-box-legendary-9509.mp3",
+    duration: 222,
+    genre: "Hip-Hop",
+  },
+  {
+    id: 3,
+    title: "chinese flute on london bridge",
+    artist: "pixabay",
+    cover: "/386-400x400.jpg",
+    audio: "/audio/chinese-flute-on-london-bridge-121729.mp3",
+    duration: 222,
+    genre: "EDM",
+  },
+  {
+    id: 4,
+    title: "christmas intro little town of bethlehem",
+    artist: "pixabay",
+    cover: "/586-400x400.jpg",
+    audio: "/audio/christmas-intro-o-little-town-of-bethlehem-125582.mp3",
+    duration: 222,
+    genre: "Classic",
+  },
+  {
+    id: 5,
+    title: "green sky",
+    artist: "pixabay",
+    cover: "/386-400x400.jpg",
+    audio: "/audio/green-sky-125179.mp3",
+    duration: 212,
+    genre: "Rock",
+  },
+    {
+    id:6,
+    title: "guitar mellow beat",
+    artist: "pixabay",
+    cover: "/386-400x400.jpg",
+    audio: "/audio/guitar-mellow-beat-20221122-128596.mp3",
+    duration: 212,
+    genre: "Hip-Hop",
+  },
+];
