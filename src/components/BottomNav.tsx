@@ -10,7 +10,7 @@ const navLinks = [
 ];
 export default function BottomNav() {
   return (
-    <nav className="fixed bottom-10 left-1/2 z-10 max-w-137.5 w-full px-3 -translate-x-1/2">
+    <nav className="fixed bottom-10 left-1/2 z-99 max-w-137.5 w-full px-3 -translate-x-1/2 lg:hidden">
       <ul className="flex items-center justify-between rounded-4xl border border-white/15 bg-white/10 px-3 py-2 shadow-2xl shadow-violet-950/40 backdrop-blur-2xl">
         {navLinks.map((LinkItem) => {
           const Icon = LinkItem.icon;

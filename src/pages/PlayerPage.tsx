@@ -72,7 +72,7 @@ export default function PlayerPage() {
           </div>
           <img
             src={currentSong.cover}
-            className="w-full object-cover aspect-square shadow-2xl max-w-100 max-h-100 shadow-violet-950/60  mx-auto rounded-4xl border border-white/10"
+            className={`w-full object-cover rounded-full shadow-2xl max-w-100 max-h-100 shadow-violet-950/60  mx-auto border border-white/10 music-player-animation ${isPlaying ? "animation-running" : "animation-paused"} `}
             alt={currentSong.title}
           />
           <div>

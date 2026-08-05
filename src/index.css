@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+
+@keyframes music-player-spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.music-player-animation{
+    animation: music-player-spin 15s linear infinite;
+}
+
+.animation-running {
+  animation-play-state: running;
+}
+
+.animation-paused {
+  animation-play-state: paused;
+}

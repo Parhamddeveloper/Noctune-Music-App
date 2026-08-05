@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router";
 import { useAppSelector } from "../hooks/hooks";
 import { songs } from "../data/songs";
 import PlayListSongsCard from "../components/playListSongsCard";
+import { useState } from "react";
+import EditPlayListModal from "../components/EditPlayListModal";
 export default function PlayListInfoPage() {
   const { playlistId } = useParams();
   const playlist = useAppSelector((state) =>
@@ -10,6 +12,8 @@ export default function PlayListInfoPage() {
       (playListItem) => playListItem.id === playlistId,
     ),
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   if (!playlist)
     return (
       <h2 className="text-2xl text-white font-bold text-center mt-6">
@@ -21,6 +25,12 @@ export default function PlayListInfoPage() {
   );
   return (
     <>
+      {isModalOpen && (
+        <EditPlayListModal
+          setIsModalOpen={setIsModalOpen}
+          playlistInfos={playlist}
+        />
+      )}
       <div className="flex justify-between items-center pt-5 gap-x-3">
         <div className="flex items-center gap-x-4 min-w-0">
           <Link to={"/library"}>
@@ -39,7 +49,8 @@ export default function PlayListInfoPage() {
         <div className="flex gap-x-3">
           <button
             aria-label="notification button"
-            className="text-white/80 size-11 bg-white/8 backdrop-blur-2xl grid place-items-center rounded-full border border-white/10"
+            className="text-white/80 size-11 bg-white/8 backdrop-blur-2xl grid place-items-center rounded-full border border-white/10 hover:bg-white/20 transition-colors"
+            onClick={()=> setIsModalOpen(true)}
           >
             <Ellipsis size={19} />
           </button>
@@ -56,7 +67,7 @@ export default function PlayListInfoPage() {
       </div>
       <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {playListSongs.map((playlistSong) => (
-          <PlayListSongsCard song={playlistSong} />
+          <PlayListSongsCard key={playlistSong.id} song={playlistSong} />
         ))}
       </div>
     </>

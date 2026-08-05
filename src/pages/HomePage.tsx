@@ -1,6 +1,7 @@
 import { Bell, Search } from "lucide-react";
 import SongCard from "../components/SongCard";
 import { songs } from "../data/songs";
+import { Link } from "react-router";
 
 export default function HomePage() {
   return (
@@ -35,9 +36,11 @@ export default function HomePage() {
           <p className="text-white/60">
             Dreamy sounds, soft synths, and late-night energy.
           </p>
-          <button className="bg-cyan-500/40 py-2 px-6 rounded-full border border-white/20">
-            Play playlist
-          </button>
+          <Link to={"/library"}>
+            <button className="bg-cyan-500/40 py-2 px-6 rounded-full border border-white/20 transition-colors hover:bg-cyan-600/30">
+              Play playlist
+            </button>
+          </Link>
         </div>
       </div>
 

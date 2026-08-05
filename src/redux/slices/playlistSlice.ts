@@ -24,7 +24,24 @@ const playListSlicer = createSlice({
   reducers: {
     createPlayList: (state, action: PayloadAction<string>) => {
       state.playLists.push({ id: uuidv4(), title: action.payload, songs: [] });
-      localStorage.setItem("playlists", JSON.stringify(state.playLists));
+    },
+    deletePlayList: (state, action: PayloadAction<string>) => {
+      const FilteredState = state.playLists.filter(
+        (playList) => playList.id !== action.payload,
+      );
+      state.playLists = FilteredState;
+    },
+    editPlayListTitle: (
+      state,
+      action: PayloadAction<{ id: string; title: string }>,
+    ) => {
+      const { id, title } = action.payload;
+
+      const playList = state.playLists.find((playList) => playList.id === id);
+
+      if (!playList) return;
+
+      playList.title = title;
     },
     addSongToPlayList: (
       state,
@@ -36,10 +53,14 @@ const playListSlicer = createSlice({
             Item.songs.push(action.payload.SongId);
         }
       });
-      localStorage.setItem("playlists", JSON.stringify(state.playLists));
     },
   },
 });
 
-export const { createPlayList, addSongToPlayList } = playListSlicer.actions;
+export const {
+  createPlayList,
+  addSongToPlayList,
+  deletePlayList,
+  editPlayListTitle,
+} = playListSlicer.actions;
 export default playListSlicer.reducer;

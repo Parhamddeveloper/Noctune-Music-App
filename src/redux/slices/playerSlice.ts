@@ -15,12 +15,12 @@ interface PlayerState {
 }
 
 const savedVolume = localStorage.getItem("volume");
-
+const savedMuteState = localStorage.getItem("isMuted");
 const initialState: PlayerState = {
   currentSong: null,
   isPlaying: false,
   volume: savedVolume ? Number(localStorage.getItem("volume")) : 100,
-  isMuted: false,
+  isMuted: savedMuteState === "true" ? Boolean(localStorage.getItem("isMuted")) : false,
   duration: 0,
   currentTime: 0,
   seekTo: null,
@@ -74,7 +74,6 @@ const playerSlice = createSlice({
     },
     changeVolume: (state, action: PayloadAction<number>) => {
       state.volume = action.payload;
-      localStorage.setItem("volume",String(action.payload));
     },
     MuteSong: (state) => {
       state.isMuted = !state.isMuted;

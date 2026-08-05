@@ -9,9 +9,11 @@ import {
 import { formatTime } from "../utils/formatTime";
 export default function AudioPlayerController() {
   const dispatch = useAppDispatch();
-  const { currentSong, isPlaying,currentTime } = useAppSelector((state) => state.player);
+  const { currentSong, isPlaying, currentTime } = useAppSelector(
+    (state) => state.player,
+  );
   return (
-    <div className="fixed bottom-30 left-1/2 z-10 max-w-137.5 w-full px-3 -translate-x-1/2">
+    <div className="fixed bottom-30 lg:hidden left-1/2 z-10 max-w-137.5 md:max-w-180 w-full px-3 -translate-x-1/2">
       <div className="flex items-center gap-3 rounded-[1.75rem] border border-white/15 bg-white/10 p-2.5 shadow-2xl shadow-violet-950/50 backdrop-blur-3xl">
         <Link to="/player" className="flex min-w-0 flex-1 items-center gap-3">
           <img

@@ -27,17 +27,10 @@ const favouriteSlice = createSlice({
           (Item) => Item !== action.payload,
         );
         state.favouriteSongs = filteredFavouriteSongs;
-        localStorage.setItem(
-          "favourite_songs",
-          JSON.stringify(filteredFavouriteSongs),
-        );
         return;
       }
       state.favouriteSongs.push(action.payload);
-      localStorage.setItem(
-        "favourite_songs",
-        JSON.stringify(state.favouriteSongs),
-      );
+
     },
   },
 });

@@ -9,6 +9,7 @@ export default function LibraryPage() {
   const { favouriteSongs } = useAppSelector((state) => state.favourites);
   const [isPlayListModalOpen, setIsPlayListModalOpen] = useState(false);
   const { playLists } = useAppSelector((state) => state.playlists);
+  
   return (
     <>
       {isPlayListModalOpen && (
@@ -32,7 +33,7 @@ export default function LibraryPage() {
         </div>
       </div>
       {favouriteSongs.length > 0 ? (
-        <div className="mt-7 space-y-3">
+        <div className="mt-7 grid md:grid-cols-2 xl:grid-cols-3 gap-4">
           {favouriteSongs.map((favouriteSong) => (
             <FavouriteSongCard key={favouriteSong} id={favouriteSong} />
           ))}
@@ -64,7 +65,7 @@ export default function LibraryPage() {
             <Plus size={17} />
           </button>
         </div>
-        <div className="mt-3 space-y-3">
+        <div className="mt-3 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {playLists.map((playListItem) => (
             <PlayListCard key={playListItem.id} Playlist={playListItem} />
           ))}
