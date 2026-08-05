@@ -1,5 +1,4 @@
 import {
-  Heart,
   Maximize2,
   Pause,
   Play,
