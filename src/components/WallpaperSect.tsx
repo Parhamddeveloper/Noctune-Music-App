@@ -1,10 +1,13 @@
-import { Trash, Wallpaper, X } from "lucide-react";
-import { useAppSelector } from "../hooks/hooks";
+// import { Trash, Wallpaper, X } from "lucide-react";
+
+import { Wallpaper } from "lucide-react";
+
+// import { useAppSelector } from "../hooks/hooks";
 export default function WallpaperSect() {
-  const uploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if(!file) return;
-  }
+  // const uploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if(!file) return;
+  // }
   // const wallpapers = useAppSelector((state) => state.wallpaper.wallpapers);
   // const currentWallpaper = useAppSelector(
   //   (state) => state.wallpaper.currentWallpaper,

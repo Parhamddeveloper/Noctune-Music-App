@@ -28,7 +28,7 @@ export const loadWallpapers = createAsyncThunk(
 export const addNewWallpaper = createAsyncThunk(
   "wallpaper/addNewWallpaper",
   async (wallpaper: WallpaperType) => {
-    await saveWallpaper(wallpaper);
+    // await saveWallpaper(wallpaper);
 
     return wallpaper;
   },

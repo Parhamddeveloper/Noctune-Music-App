@@ -1,4 +1,3 @@
-import { Palette } from "lucide-react";
 import WallpaperSect from "../components/WallpaperSect";
 import ThemeSect from "../components/ThemeSect";
 import ImportSongSect from "../components/ImportSongSect";
