@@ -51,14 +51,14 @@ export default function CreatePlayListModal({
           </div>
           <div className="flex items-center gap-x-3 mt-6">
             <button
-              className="bg-white/4 backdrop-blur-2xl border border-white/10 flex-1 py-3 rounded-full text-sm"
+              className="bg-white/4 backdrop-blur-2xl border border-white/10 hover:bg-white/10 flex-1 py-3 rounded-full text-sm transition-colors"
               onClick={() => setIsModalOpen(false)}
             >
               Cancel
             </button>
             <button
               onClick={addPlayListHandler}
-              className="bg-blue-600 text-white flex-1 py-3 rounded-full font-bold drop-shadow-lg  drop-shadow-blue-500/50 text-sm disabled:opacity-35 disabled:drop-shadow-none"
+              className="bg-(--color-surface) text-white flex-1 py-3 rounded-full font-bold drop-shadow-lg  drop-shadow-(color:--color-surface)/50 text-sm disabled:opacity-35 disabled:drop-shadow-none"
               disabled={!title}
             >
               Create

@@ -7,9 +7,9 @@ interface playListProps {
 export default function PlayListCard({ Playlist }: playListProps) {
   return (
     <Link to={`/playlist/${Playlist.id}`}>
-      <div className="bg-white/8 backdrop-blur-2xl border border-white/10 rounded-2xl p-4">
+      <div className="bg-(--color-text)/8 backdrop-blur-2xl border border-(--color-text)/10 rounded-2xl p-4">
         <h3 className="font-bold truncate">{Playlist.title}</h3>
-        <p className="text-sm text-white/50 mt-1.5">
+        <p className="text-sm text-(--color-text)/50 mt-1.5">
           {Playlist.songs.length} songs
         </p>
       </div>

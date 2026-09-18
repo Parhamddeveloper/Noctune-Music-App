@@ -34,8 +34,8 @@ export default function SearchPage() {
         />
       )}
       <div className="mt-8">
-        <p className="text-white/50 text-sm">Find your sound</p>
-        <h1 className="text-white text-3xl font-bold mt-1">Search</h1>
+        <p className="text-(--color-text)/50 text-sm">Find your sound</p>
+        <h1 className="text-(--color-text) text-3xl font-bold mt-1">Search</h1>
       </div>
       <div className="mt-5">
         <input
@@ -44,14 +44,14 @@ export default function SearchPage() {
           value={searchQuery}
           ref={inputRef}
           placeholder="Songs, artists, or genres"
-          className="w-full text-white focus:outline-0 focus:shadow-lg focus:drop-shadow-2xl focus:border-violet-300/40 focus:ring-4 focus:ring-violet-400/10 focus:bg-white/12 text-sm px-3 py-4 bg-white/8 backdrop-blur-3xl rounded-2xl placeholder:text-white/45 border border-white/15 transition-colors duration-200"
+          className="w-full text-(--color-text) focus:outline-0 focus:shadow-lg focus:drop-shadow-2xl focus:border-(--color-primary)/40 focus:ring-4 focus:ring-(--color-primary)/5 focus:bg-(--color-text)/12 text-sm px-3 py-4 bg-(--color-text)/8 backdrop-blur-3xl rounded-2xl placeholder:text-(--color-text)/45 border border-white/15 transition-colors duration-200"
         />
         <div className="w-full flex justify-center gap-x-3 mt-3 text-sm overflow-x-auto ps-4">
           {genres.map((genre) => (
             <button
               key={genre.id}
               onClick={() => setSelectedGenre(genre.name)}
-              className={`border  px-4 py-2   backdrop-blur-2xl  rounded-full transition-colors shrink-0 ${selectedGenre === genre.name ? "bg-violet-500/25 border-violet-300/40 text-violet-200" : "bg-white/8 border-white/10 hover:bg-white/10 text-white/50"}`}
+              className={`border  px-4 py-2   backdrop-blur-2xl  rounded-full transition-colors shrink-0 ${selectedGenre === genre.name ? "bg-(--color-surface)/25 border-(--color-primary)/40 text-(--color-primary)" : "bg-(--color-text)/8 border-(--color-text)/10 hover:bg-(--color-text)/10 text-(--color-text)/50"}`}
             >
               {genre.name}
             </button>
@@ -59,7 +59,7 @@ export default function SearchPage() {
         </div>
       </div>
       {!trimmedSearchQuery ? (
-        <div className="mt-8 text-white/95 font-bold">
+        <div className="mt-8 text-(--color-text)/95 font-bold">
           {selectedGenre === "All" ? (
             <h2>Browse all songs</h2>
           ) : FilteredSongs.length > 0 ? (
@@ -71,10 +71,10 @@ export default function SearchPage() {
                 aria-label="focus to search input"
                 onClick={() => inputRef.current?.focus()}
               >
-                <Search size={28} className="text-violet-300" />
+                <Search size={28} className="text-(--color-primary)" />
               </button>
-              <h2 className="font-bold text-white text-xl">No results found</h2>
-              <p className="text-white/50 text-center">
+              <h2 className="font-bold text-(--color-text) text-xl">No results found</h2>
+              <p className="text-(--color-text)/50 text-center">
                 We couldn't find a song with
                 <span className="block">"{selectedGenre}" genre.</span>
               </p>
@@ -114,8 +114,8 @@ export default function SearchPage() {
           >
             <Search size={28} className="text-violet-300" />
           </button>
-          <h2 className="font-bold text-white text-xl">No results found</h2>
-          <p className="text-white/50 text-center">
+          <h2 className="font-bold text-(--color-text) text-xl">No results found</h2>
+          <p className="text-(--color-text)/50 text-center">
             We couldn't find anything matching
             <span className="block">"{searchQuery}".</span>
           </p>

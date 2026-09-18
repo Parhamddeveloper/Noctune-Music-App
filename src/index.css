@@ -1,19 +1,64 @@
 @import "tailwindcss";
 
-
-@keyframes music-player-spin {
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(360deg);
-    }
+.app-theme-midnight {
+  --color-primary: oklch(81.1% 0.111 293.571);
+  --color-background: #090b16;
+  --color-surface: #7f22fe;
+  --color-text: #fff;
+  --color-player-icons: #fff;
 }
 
+.app-theme-ocean {
+  --color-primary: #b8d6f3;
+  --color-background: #001829;
+  --color-surface: #2b89df;
+  --color-text: #fff;
+  --color-player-icons: #fff;
+}
 
+.app-theme-sunset {
+  --color-primary: #f97316;
+  --color-background: #170b0b;
+  --color-surface: #f6730f;
+  --color-text: #fff;
+  --color-player-icons: #fff;
+}
 
-.music-player-animation{
-    animation: music-player-spin 15s linear infinite;
+.app-theme-forest {
+  --color-primary: #12fbb1;
+  --color-background: #0b3329;
+  --color-surface: #6aecc3;
+  --color-text: #fff;
+  --color-player-icons: #fff;
+}
+
+.app-theme-cyber {
+  --color-primary: #ff1ddc;
+  --color-background: #3e003b;
+  --color-surface: #ee34e5;
+  --color-text: #fff;
+  --color-player-icons: #fff;
+}
+
+.app-theme-light {
+  --color-primary: #0b75ff;
+  --color-background: #f3f6fd;
+  --color-surface: #0876fd;
+  --color-text: #06249b;
+  --color-player-icons: #0b75ff;
+}
+
+@keyframes music-player-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.music-player-animation {
+  animation: music-player-spin 15s linear infinite;
 }
 
 .animation-running {

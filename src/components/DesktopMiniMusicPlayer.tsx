@@ -45,7 +45,7 @@ export default function DesktopMiniMusicPlayer() {
   if (!currentSong) return null;
 
   return (
-    <div className="fixed bottom-5 left-[276px] right-5 z-50 hidden h-24 items-center gap-6 rounded-2xl border border-white/10 bg-[#17182a]/90 px-5 text-white shadow-2xl backdrop-blur-xl lg:flex">
+    <div className="fixed bottom-5 left-[276px] right-5 z-50 hidden h-24 items-center gap-6 rounded-2xl border border-white/10 bg-(--color-text)/5 px-5 text-(--color-text) shadow-2xl backdrop-blur-xl lg:flex">
       <div className="flex min-w-0 w-64 items-center gap-3">
         <img
           src={currentSong.cover}
@@ -55,8 +55,7 @@ export default function DesktopMiniMusicPlayer() {
 
         <div className="min-w-0">
           <p className="truncate font-medium">{currentSong.title}</p>
-
-          <p className="truncate text-sm text-white/50">{currentSong.artist}</p>
+          <p className="truncate text-sm text-(--color-text)/50">{currentSong.artist}</p>
         </div>
       </div>
 
@@ -64,21 +63,21 @@ export default function DesktopMiniMusicPlayer() {
         <div className="flex items-center gap-5">
           <button
             aria-label={`${isShuffled ? "turn off shuffle" : "turn on shuffle"}`}
-            className={`${isShuffled ? "text-violet-300 drop-shadow-md drop-shadow-violet-300" : "text-white/40"}`}
+            className={`${isShuffled ? "text-(--color-primary) drop-shadow-md drop-shadow-(color:--color-primary)" : "text-(--color-player-icons)/40"}`}
             onClick={() => dispatch(toggleShuffle())}
           >
             <Shuffle size={20} />
           </button>
 
           <button
-            className="text-white/70 hover:text-white"
+            className="text-(--color-player-icons)/70 hover:text-(--color-primary)"
             onClick={() => dispatch(GoPreviousSong())}
           >
             <SkipBack size={22} fill="currentColor" />
           </button>
 
           <button
-            className="grid size-11 place-items-center rounded-full bg-violet-600 shadow-lg shadow-violet-600/30 hover:bg-violet-500"
+            className="grid size-11 place-items-center rounded-full bg-linear-to-br from-(--color-primary)/80 to-fuchsia-500/70 shadow-lg shadow-violet-600/30 hover:bg-violet-500 text-white"
             onClick={() => dispatch(togglePlay())}
           >
             {isPlaying ? (
@@ -89,19 +88,19 @@ export default function DesktopMiniMusicPlayer() {
           </button>
 
           <button
-            className="text-white/70 hover:text-white"
+            className="text-(--color-player-icons)/70 hover:text-(--color-primary)"
             onClick={() => dispatch(GoNextSong())}
           >
             <SkipForward size={22} fill="currentColor" />
           </button>
 
           <button
-            className={`${loop !== "off" ? "relative text-violet-300 drop-shadow-md drop-shadow-violet-300" : "text-white/40"}`}
+            className={`${loop !== "off" ? "relative text-(--color-primary) drop-shadow-md drop-shadow-(color:--color-primary" : "text-(--color-player-icons)/40"}`}
             onClick={() => dispatch(changeLoop())}
             aria-label={`repeat ${loop}`}
           >
             {loop === "one" && (
-              <span className="absolute -top-0.5 -right-1 bg-violet-300 size-3 place-items-center rounded-full text-[8px] text-violet-950">
+              <span className="absolute -top-0.5 -right-1 bg-(--color-primary) size-3 place-items-center rounded-full text-[8px] text-violet-950">
                 1
               </span>
             )}
@@ -110,7 +109,7 @@ export default function DesktopMiniMusicPlayer() {
         </div>
 
         <div className="flex w-full max-w-xl items-center gap-3">
-          <span className="w-10 text-right text-xs text-white/50">
+          <span className="w-10 text-right text-xs text-(--color-text)/50">
             {formatTime(currentTime)}
           </span>
 
@@ -120,16 +119,16 @@ export default function DesktopMiniMusicPlayer() {
             max={duration}
             value={currentTime}
             onChange={(e) => dispatch(seekTo(e.target.value))}
-            className="song-range min-w-0 flex-1"
+            className="song-range min-w-0 flex-1 accent-(--color-primary)" 
           />
-          <span className="w-10 text-xs text-white/50">
+          <span className="w-10 text-xs text-(--color-text)/50">
             {formatTime(duration)}
           </span>
         </div>
       </div>
 
       <div className="flex w-56 items-center justify-end gap-3">
-        <button className="text-white/50" onClick={() => dispatch(MuteSong())}>
+        <button className="text-(--color-player-icons)/50" onClick={() => dispatch(MuteSong())}>
           {isMuted ? (
             <VolumeOff size={19} color="#fb2c36" />
           ) : (
@@ -144,13 +143,13 @@ export default function DesktopMiniMusicPlayer() {
           name=""
           id=""
           defaultValue={volume}
-          className="w-full h-1.5 accent-violet-400"
+          className="w-full h-1.5 accent-(--color-surface)"
           onChange={changeVolumeHandler}
         />
 
         <button
           onClick={() => navigate("/player")}
-          className="ml-2 text-white/60 hover:text-white"
+          className="ml-2 text-(--color-player-icons)/60 hover:text-(--color-primary)"
           aria-label="Open player"
         >
           <Maximize2 size={20} />

@@ -66,7 +66,7 @@ export default function AddSongToPlayListModal({
                 onClick={() => addSongToPlayListHandler(playlistItem.id)}
               >
                 <div className="flex w-full min-w-0 items-center gap-3">
-                  <div className="size-13 grid place-items-center bg-violet-600/20 rounded-2xl text-violet-300 border border-violet-500/20">
+                  <div className="size-13 grid place-items-center bg-(--color-surface)/20 rounded-2xl text-(--color-primary) border border-violet-500/20">
                     <Music2 />
                   </div>
                   <div className="min-w-0 flex-1 overflow-hidden">

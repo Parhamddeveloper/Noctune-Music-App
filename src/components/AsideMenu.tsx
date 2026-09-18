@@ -14,8 +14,8 @@ export default function AsideMenu() {
   const { playLists } = useAppSelector((state) => state.playlists);
   const latestFourPlayLists = playLists.slice(0, 4).reverse();
   return (
-    <aside className="hidden fixed lg:block left-0 top-0 w-70 h-full text-white  p-5 z-99 ">
-      <div className="border-white/10 border bg-white/5 backdrop-blur-lg h-full rounded-2xl flex flex-col  py-4 px-4">
+    <aside className="hidden fixed lg:block left-0 top-0 w-70 h-full text-(--color-text)  p-5 z-99 ">
+      <div className="border-white/10 border bg-(--color-text)/10 backdrop-blur-lg h-full rounded-2xl flex flex-col  py-4 px-4">
         <div className="flex items-center gap-x-2">
           <img src="App logo.png" alt="Noctune logo" className="size-12" />
           <span className="text-2xl">Noctune</span>
@@ -29,7 +29,7 @@ export default function AsideMenu() {
                 key={Link.id}
                 to={Link.href}
                 className={({ isActive }) =>
-                  `${isActive && "bg-linear-to-r from-violet-500/25 to-cyan-400/2 border border-white/10"} flex items-center gap-x-4 text-xl w-full ps-2 py-3 rounded-2xl`
+                  `${isActive && "bg-linear-to-r from-(--color-surface)/25 to-(--color-primary)/2 border border-white/10"} flex items-center gap-x-4 text-xl text-(--color-text) w-full ps-2 py-3 rounded-2xl`
                 }
               >
                 <Icon size={28} />
@@ -38,15 +38,15 @@ export default function AsideMenu() {
             );
           })}
         </nav>
-        <hr className="w-full bg-white opacity-30 my-4" />
+        <hr className="w-full opacity-30 my-4" />
         <div className="flex justify-between items-center">
-          <h2 className="text-white/50">YOUR LIBRARY</h2>
+          <h2 className="text-(--color-text)/50">YOUR LIBRARY</h2>
           <Link to={"/library"}>
             <button
               aria-label="add new playlist"
               className="hover:rotate-90 transition-transform duration-300"
             >
-              <Plus className="text-white/70" />
+              <Plus className="text-(--color-text)/70" />
             </button>
           </Link>
         </div>

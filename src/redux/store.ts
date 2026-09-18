@@ -2,11 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import playerReducer from "./slices/playerSlice";
 import favouriteReducer from "./slices/favouriteSlice";
 import playlistReducer from "./slices/playlistSlice";
+import themeReducer from "./slices/themeSlice";
+import wallpaperReducer from "./slices/wallpaperSlice";
 export const store = configureStore({
   reducer: {
     player: playerReducer,
     favourites: favouriteReducer,
     playlists: playlistReducer,
+    theme: themeReducer,
+    wallpaper: wallpaperReducer,
   },
 });
 
@@ -40,6 +44,16 @@ store.subscribe(() => {
       JSON.stringify(currentStates.playlists.playLists),
     );
   }
+  if (currentStates.theme.theme !== previousStates.theme.theme) {
+    localStorage.setItem(
+      "theme",
+      JSON.stringify({ theme: currentStates.theme.theme }),
+    );
+  }
+  // if(currentStates.theme.wallpaper !== previousStates.theme.wallpaper){
+  //   console.log("Hello");
+
+  // }
   previousStates = currentStates;
 });
 

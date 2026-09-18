@@ -21,9 +21,9 @@ export default function SongCard({ song }: MusicCardProps) {
     dispatch(toggleFavourite(song.id));
   };
   return (
-    <div className="min-w-40 relative p-3 rounded-3xl bg-white/8 hover:bg-white/20 hover:scale-102 backdrop-blur-2xl flex flex-col gap-y-1 hover:-translate-y-2 transition-all duration-300 border border-white/10 hover:border-white/40">
+    <div className="min-w-40 relative p-3 rounded-3xl bg-(--color-text)/8 hover:bg-(--color-text)/20 hover:scale-102 backdrop-blur-2xl flex flex-col gap-y-1 hover:-translate-y-2 transition-all duration-300 border border-white/10 hover:border-white/40">
       <button
-        className={`absolute right-2 top-2 bg-black/20 backdrop-blur-2xl rounded-full size-9 place-items-center ${IsSongFavourite ? "text-violet-300 bg-violet-300/50" : "text-white/70"} z-10`}
+        className={`absolute right-2 top-2 bg-black/40 backdrop-blur-2xl rounded-full size-9 place-items-center ${IsSongFavourite ? "text-(--color-primary) bg-(--color-surface)/60" : "text-white/70"} z-10`}
         aria-label="make favourite"
         onClick={toggleFavouriteHandler}
       >
@@ -47,12 +47,12 @@ export default function SongCard({ song }: MusicCardProps) {
         <img src={song.cover} alt={song.title} className="rounded-2xl " />
       </div>
       <div className="flex flex-col flex-1">
-        <h2 className="text-white font-bold line-clamp-2 leading-7 h-14">
+        <h2 className="text-(--color-text) font-bold line-clamp-2 leading-7 h-14">
           {song.title}
         </h2>
         <div className="mt-auto">
-          <p className="text-white/50 text-sm">{song.artist}</p>
-          <span className="text-xs  text-violet-300/70">{song.genre}</span>
+          <p className="text-(--color-text)/50 text-sm">{song.artist}</p>
+          <span className="text-xs  text-(--color-primary)/80">{song.genre}</span>
         </div>
       </div>
     </div>

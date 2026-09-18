@@ -63,7 +63,7 @@ export default function EditPlayListModal({
               className="w-full text-white focus:outline-0 focus:shadow-lg focus:drop-shadow-2xl focus:border-violet-300/40 focus:ring-4 focus:ring-violet-400/10 focus:bg-white/12 text-sm px-3 py-4 bg-white/8 backdrop-blur-3xl rounded-2xl placeholder:text-white/45 border border-white/15 transition-colors duration-200"
             />
             <button
-              className="w-full flex items-center justify-center gap-x-2 bg-blue-600 text-white flex-1 py-3 rounded-full font-bold drop-shadow-lg  drop-shadow-blue-500/50 text-sm transition-colors hover:bg-blue-500"
+              className="w-full flex items-center justify-center gap-x-2 bg-(--color-surface) text-white flex-1 py-3 rounded-full font-bold drop-shadow-lg  drop-shadow-(color:--color-surface)/50 text-sm transition-colors hover:bg-(--color-primary)"
               onClick={changeTitleHandler}
             >
               <Pencil size={19} /> Save changes

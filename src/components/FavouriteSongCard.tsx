@@ -11,7 +11,7 @@ export default function FavouriteSongCard({ id }: { id: number }) {
   if (!song) return null;
   let IsSongPlaying = song.id === currentSong?.id && isPlaying;
   return (
-    <div className="flex w-full justify-between items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-3 backdrop-blur-3xl">
+    <div className="flex w-full justify-between items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-(--color-text)/8 p-3 backdrop-blur-3xl">
       <div className="flex min-w-0 items-center gap-3">
         <img
           src={song.cover}
@@ -20,9 +20,9 @@ export default function FavouriteSongCard({ id }: { id: number }) {
         />
 
         <div className="min-w-0">
-          <h3 className="truncate font-semibold text-white">{song.title}</h3>
+          <h3 className="truncate font-semibold text-(--color-text)">{song.title}</h3>
 
-          <div className="flex min-w-0 items-center text-sm text-white/50">
+          <div className="flex min-w-0 items-center text-sm text-(--color-text)/50">
             <span className="truncate">{song.artist}</span>
 
             <Dot className="" size={18} />
@@ -33,7 +33,7 @@ export default function FavouriteSongCard({ id }: { id: number }) {
       </div>
       <div className="flex  items-center gap-2">
         <button
-          className="grid size-8 shrink-0 place-items-center text-violet-300"
+          className="grid size-8 shrink-0 place-items-center text-(--color-primary)"
           aria-label="Add song to favorites"
           onClick={()=> dispatch(toggleFavourite(id))}
         >
@@ -41,7 +41,7 @@ export default function FavouriteSongCard({ id }: { id: number }) {
         </button>
 
         <button
-          className="grid size-11 shrink-0 place-items-center rounded-full border border-white/10 bg-white/10 text-violet-200 backdrop-blur-2xl cursor-pointer"
+          className="grid size-11 shrink-0 place-items-center rounded-full border border-white/10 bg-(white)/10 text-(--color-primary) backdrop-blur-2xl cursor-pointer"
           aria-label={IsSongPlaying ? "Pause song" : "Play song"}
           onClick={() => dispatch(playSong(song))}
         >

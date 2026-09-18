@@ -55,37 +55,37 @@ export default function PlayerPage() {
       {currentSong ? (
         <div className="max-w-7xl mx-auto">
           <div className="flex py-7 justify-between">
-            <button className="bg-white/8 text-white backdrop-blur-2xl size-10 place-items-center rounded-full border border-white/10">
+            <button className="bg-(--color-text)/8 text-white backdrop-blur-2xl size-10 place-items-center rounded-full border border-white/10">
               <ChevronDown size={20} />
             </button>
             <div className="flex">
-              <p className="text-white/50 font-light tracking-widest text-sm">
+              <p className="text-(--color-text)/50 font-light tracking-widest text-sm">
                 NOW PLAYING
-                <span className="block text-center text-white tracking-normal font-semibold">
+                <span className="block text-center text-(--color-text) tracking-normal font-semibold">
                   Noctune
                 </span>
               </p>
             </div>
-            <button className="bg-white/8 text-white backdrop-blur-2xl size-10 place-items-center rounded-full border border-white/10">
+            <button className="bg-(--color-text)/8 text-white backdrop-blur-2xl size-10 place-items-center rounded-full border border-white/10">
               <Ellipsis size={20} />
             </button>
           </div>
           <img
             src={currentSong.cover}
-            className={`w-full object-cover rounded-full shadow-2xl max-w-100 max-h-100 shadow-violet-950/60  mx-auto border border-white/10 music-player-animation ${isPlaying ? "animation-running" : "animation-paused"} `}
+            className={`w-full object-cover rounded-full max-w-100 max-h-100  mx-auto border border-white/10 music-player-animation ${isPlaying ? "animation-running" : "animation-paused"} `}
             alt={currentSong.title}
           />
           <div>
             <div className="flex justify-between items-center gap-x-3">
               <div className="mt-6 min-w-0">
-                <h2 className="text-white text-2xl font-bold truncate">
+                <h2 className="text-(--color-text) text-2xl font-bold truncate">
                   {currentSong.title}
                 </h2>
                 <p className="text-white/50 truncate">{currentSong.artist}</p>
               </div>
               <div>
                 <button
-                  className={`shrink-0 border border-white/10 bg-white/8 backdrop-blur-2xl size-11 rounded-full place-items-center ${isSongFavourite ? "text-violet-300" : "text-white/50"}`}
+                  className={`shrink-0 border border-white/10 bg-white/8 backdrop-blur-2xl size-11 rounded-full place-items-center ${isSongFavourite ? "text-(--color-primary)" : "text-white/50"}`}
                   aria-label="make song favourite"
                   onClick={() => dispatch(toggleFavourite(currentSong.id))}
                 >
@@ -102,7 +102,7 @@ export default function PlayerPage() {
                 min={0}
                 max={duration}
                 value={currentTime}
-                className="w-full"
+                className="w-full accent-(--color-primary)"
                 onChange={(e) => dispatch(seekTo(e.target.value))}
               />
               <div className="flex justify-between text-white/40 mt-5 text-sm">
@@ -111,38 +111,38 @@ export default function PlayerPage() {
               </div>
               <div className="flex mt-5 justify-between items-center">
                 <button
-                  className={`${isShuffled ? "text-violet-300 drop-shadow-md drop-shadow-violet-300" : "text-white/40"}`}
+                  className={`${isShuffled ? "text-(--color-primary) drop-shadow-md drop-shadow-(color:--color-primary" : "text-(--color-player-icons)/40"}`}
                   onClick={() => dispatch(toggleShuffle())}
                 >
                   <Shuffle size={20} />
                 </button>
                 <button
-                  className="text-white/85 hover:bg-white/10 size-12 place-items-center rounded-full"
+                  className="text-(--color-player-icons)/85 hover:bg-white/10 size-12 place-items-center rounded-full"
                   onClick={() => dispatch(GoPreviousSong())}
                 >
                   <SkipBack fill="currentColor" />
                 </button>
                 <button
                   aria-label={isPlaying ? "Pause song" : "Play song"}
-                  className="grid size-18 place-items-center rounded-full border border-white/20 bg-linear-to-br from-violet-400/80 to-fuchsia-500/70 shadow-lg shadow-violet-500/25 transition hover:scale-105 text-white"
+                  className="grid size-18 place-items-center rounded-full border border-white/20 bg-linear-to-br from-(--color-primary)/80 to-fuchsia-500/70 shadow-lg shadow-violet-500/25 transition hover:scale-105 text-white"
                   onClick={() => dispatch(togglePlay())}
                 >
                   {isPlaying ? <Pause fill="white" /> : <Play fill="white" />}
                 </button>
                 <button
-                  className="text-white/85 hover:bg-white/10 size-12 place-items-center rounded-full"
+                  className="text-(--color-player-icons)/85 hover:bg-white/10 size-12 place-items-center rounded-full"
                   aria-label="Skip forward"
                   onClick={() => dispatch(GoNextSong())}
                 >
                   <SkipForward fill="currentColor" />
                 </button>
                 <button
-                  className={`${loop !== "off" ? "relative text-violet-300 drop-shadow-md drop-shadow-violet-300" : "text-white/40"}`}
+                  className={`${loop !== "off" ? "relative text-(--color-primary) drop-shadow-md drop-shadow-(color:--color-primary)" : "text-(--color-player-icons)/40"}`}
                   onClick={() => dispatch(changeLoop())}
                   aria-label={`repeat ${loop}`}
                 >
                   {loop === "one" && (
-                    <span className="absolute -top-0.5 -right-1 bg-violet-300 size-3 place-items-center rounded-full text-[8px] text-violet-950">
+                    <span className="absolute -top-0.5 -right-1 bg-(--color-primary) size-3 place-items-center rounded-full text-[8px] text-violet-950">
                       1
                     </span>
                   )}
@@ -164,7 +164,7 @@ export default function PlayerPage() {
                   name=""
                   id=""
                   defaultValue={volume}
-                  className="w-full h-1.5 accent-violet-400"
+                  className="w-full h-1.5 accent-(--color-surface)"
                   onChange={changeVolumeHandler}
                 />
                 <span className="text-white/50 text-sm">{volume}</span>
@@ -174,11 +174,11 @@ export default function PlayerPage() {
         </div>
       ) : (
         <div className="h-screen flex flex-col items-center justify-center gap-y-3 pb-10">
-          <div className="grid text-violet-300 bg-white/10 size-19 place-items-center rounded-full border border-white/10">
+          <div className="grid text-(--color-primary) bg-(--color-text)/10 size-19 place-items-center rounded-full border border-(--color-text)/10">
             <Music size={35} />
           </div>
-          <h2 className="text-white font-bold text-2xl">No song selected</h2>
-          <p className="text-white/50">Please choose a song first</p>
+          <h2 className="text-(--color-text) font-bold text-2xl">No song selected</h2>
+          <p className="text-(--color-text)/50">Please choose a song first</p>
         </div>
       )}
     </>
