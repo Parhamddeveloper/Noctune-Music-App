@@ -1,3 +1,4 @@
+import type { WallpaperDBType } from "../types/wallpaperDBType";
 import type { WallpaperType } from "../types/wallpaperType";
 
 export const openWallpaperDB = (): Promise<IDBDatabase> => {
@@ -22,17 +23,11 @@ export const openWallpaperDB = (): Promise<IDBDatabase> => {
   });
 };
 
-export const addWallpaper = async (
-  wallpaper: Blob,
-  name: string
-) => {
+export const addWallpaper = async (wallpaper: Blob, name: string) => {
   const db = await openWallpaperDB();
 
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(
-      "wallpapers",
-      "readwrite"
-    );
+    const transaction = db.transaction("wallpapers", "readwrite");
 
     const store = transaction.objectStore("wallpapers");
 
@@ -55,17 +50,22 @@ export const getWallpapers = async (): Promise<WallpaperType[]> => {
   const db = await openWallpaperDB();
 
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(
-      "wallpapers",
-      "readonly"
-    );
+    const transaction = db.transaction("wallpapers", "readonly");
 
     const store = transaction.objectStore("wallpapers");
 
     const request = store.getAll();
 
     request.onsuccess = () => {
-      resolve(request.result);
+      const wallpapers: WallpaperType[] = request.result.map(
+        (wallpaper: WallpaperDBType) => ({
+          id: wallpaper.id,
+          name: wallpaper.name,
+          image: URL.createObjectURL(wallpaper.image),
+        }),
+      );
+
+      resolve(wallpapers);
     };
 
     request.onerror = () => {
@@ -78,10 +78,7 @@ export const deleteWallpaper = async (id: number) => {
   const db = await openWallpaperDB();
 
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(
-      "wallpapers",
-      "readwrite"
-    );
+    const transaction = db.transaction("wallpapers", "readwrite");
 
     const store = transaction.objectStore("wallpapers");
 

@@ -50,11 +50,23 @@ store.subscribe(() => {
       JSON.stringify({ theme: currentStates.theme.theme }),
     );
   }
-  // if(currentStates.theme.wallpaper !== previousStates.theme.wallpaper){
-  //   console.log("Hello");
-
-  // }
-  previousStates = currentStates;
+  if (
+    currentStates.wallpaper.currentWallpaperID !==
+    previousStates.wallpaper.currentWallpaperID
+  )
+    if (
+      currentStates.wallpaper.currentWallpaperID !==
+      previousStates.wallpaper.currentWallpaperID
+    ) {
+      if (currentStates.wallpaper.currentWallpaperID === null) {
+        localStorage.removeItem("currentWallpaperID");
+      } else {
+        localStorage.setItem(
+          "currentWallpaperID",
+          String(currentStates.wallpaper.currentWallpaperID),
+        );
+      }
+    }
 });
 
 export type AppDispatch = typeof store.dispatch;
