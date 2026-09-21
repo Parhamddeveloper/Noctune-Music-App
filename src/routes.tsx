@@ -7,6 +7,7 @@ import LibraryPage from "./pages/LibraryPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PlayListInfoPage from "./pages/PlayListInfoPage";
+import ImportedMusicPage from "./pages/ImportedMusicPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "playlist/:playlistId",
         element: <PlayListInfoPage />,
+      },
+      {
+        path: "profile/imported-musics",
+        element: <ImportedMusicPage />,
       },
     ],
   },

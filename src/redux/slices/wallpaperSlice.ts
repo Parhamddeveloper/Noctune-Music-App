@@ -42,7 +42,6 @@ export const addNewWallpaper = createAsyncThunk(
 export const deleteWallpaper = createAsyncThunk(
   "wallpaper/deleteWallpaper",
   async (id: number) => {
-    await deleteWallpaper(id);
     return id;
   },
 );

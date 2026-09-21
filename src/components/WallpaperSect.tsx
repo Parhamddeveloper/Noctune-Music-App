@@ -52,8 +52,8 @@ export default function WallpaperSect() {
               </>
             ) : (
               <>
-                <div className="flex aspect-video justify-center items-center bg-(--color-text)/10 rounded-lg border border-(--color-surface)">
-                  <h3>No image selected</h3>
+                <div >
+                  <label className="flex aspect-video justify-center items-center bg-(--color-text)/10 rounded-lg border border-(--color-surface) cursor-pointer" htmlFor="wallpaper-upload">No image selected</label>
                 </div>
               </>
             )}

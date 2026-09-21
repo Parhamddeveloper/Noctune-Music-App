@@ -1,8 +1,9 @@
 import { Heart, Pause, Play } from "lucide-react";
 import type { Song } from "../types/songType";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { playSong } from "../redux/slices/playerSlice";
+import { playSong, setQueue } from "../redux/slices/playerSlice";
 import { toggleFavourite } from "../redux/slices/favouriteSlice";
+import { songs } from "../data/songs";
 
 interface MusicCardProps {
   song: Song;
@@ -15,6 +16,8 @@ export default function SongCard({ song }: MusicCardProps) {
   const IsSongPlaying = currentSong?.id === song.id && isPlaying;
   const IsSongFavourite = favourites.favouriteSongs.includes(song.id);
   const PlaySongHandler = () => {
+    const builtInSongs = songs.map((song)=>({id:song.id,source:"built-in" as const}))
+    dispatch(setQueue(builtInSongs))
     dispatch(playSong(song));
   };
   const toggleFavouriteHandler = () => {

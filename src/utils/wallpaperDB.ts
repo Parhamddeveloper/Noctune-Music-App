@@ -3,7 +3,7 @@ import type { WallpaperType } from "../types/wallpaperType";
 
 export const openWallpaperDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("noctuneDB", 3);
+    const request = indexedDB.open("noctuneDB", 4);
     request.onerror = () => {
       reject(request.error);
     };

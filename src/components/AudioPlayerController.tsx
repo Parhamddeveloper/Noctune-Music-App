@@ -2,8 +2,8 @@ import { Dot, Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import { Link } from "react-router";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import {
-  GoNextSong,
-  GoPreviousSong,
+  goNextSong,
+  goPreviousSong,
   togglePlay,
 } from "../redux/slices/playerSlice";
 import { formatTime } from "../utils/formatTime";
@@ -41,7 +41,7 @@ export default function AudioPlayerController() {
             type="button"
             aria-label="Previous song"
             className="grid size-9 place-items-center rounded-full text-(--color-player-icons)/55 transition hover:bg-(--color-text)/10 hover:text-(--color-primary)"
-            onClick={() => dispatch(GoPreviousSong())}
+            onClick={() => dispatch(goPreviousSong())}
           >
             <SkipBack size={18} />
           </button>
@@ -58,7 +58,7 @@ export default function AudioPlayerController() {
             type="button"
             aria-label="Next song"
             className="grid size-9 place-items-center rounded-full text-(--color-player-icons)/55 transition hover:bg-(--color-text)/10 hover:text-(--color-primary)"
-            onClick={() => dispatch(GoNextSong())}
+            onClick={() => dispatch(goNextSong())}
           >
             <SkipForward size={18} />
           </button>

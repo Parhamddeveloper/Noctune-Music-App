@@ -4,6 +4,7 @@ import favouriteReducer from "./slices/favouriteSlice";
 import playlistReducer from "./slices/playlistSlice";
 import themeReducer from "./slices/themeSlice";
 import wallpaperReducer from "./slices/wallpaperSlice";
+import ImportedMusicsReducer from "./slices/importedMusicSlice"
 export const store = configureStore({
   reducer: {
     player: playerReducer,
@@ -11,6 +12,7 @@ export const store = configureStore({
     playlists: playlistReducer,
     theme: themeReducer,
     wallpaper: wallpaperReducer,
+    importedMusics : ImportedMusicsReducer
   },
 });
 

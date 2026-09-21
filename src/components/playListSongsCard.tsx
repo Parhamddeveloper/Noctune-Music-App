@@ -2,7 +2,9 @@ import { Dot, Heart, Pause, Play } from "lucide-react";
 import type { Song } from "../types/songType";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { toggleFavourite } from "../redux/slices/favouriteSlice";
-import { playSong } from "../redux/slices/playerSlice";
+import { playSong, setQueue } from "../redux/slices/playerSlice";
+import { songs } from "../data/songs";
+import { useParams } from "react-router";
 
 interface PlayListSongsCardProps {
   song: null | Song;
@@ -10,7 +12,23 @@ interface PlayListSongsCardProps {
 export default function PlayListSongsCard({ song }: PlayListSongsCardProps) {
   if (!song) return <h2>Song doesn't exist</h2>;
   const dispatch = useAppDispatch();
+  const { playlistId } = useParams();
   const { currentSong, isPlaying } = useAppSelector((state) => state.player);
+  const playlist = useAppSelector((state) =>
+    state.playlists.playLists.find(
+      (playListItem) => playListItem.id === playlistId,
+    ),
+  );
+  const playSongHandler = () => {
+    if (!playlist) return;
+    const playlistSongs = playlist.songs.map((song) => ({
+      id: song,
+      source: "built-in" as const,
+    }));
+    if (!playlistSongs) return;
+    dispatch(setQueue(playlistSongs));
+    dispatch(playSong(song));
+  };
   const favouriteSongs = useAppSelector(
     (state) => state.favourites.favouriteSongs,
   );
@@ -29,7 +47,9 @@ export default function PlayListSongsCard({ song }: PlayListSongsCardProps) {
         />
 
         <div className="min-w-0">
-          <h3 className="truncate font-semibold text-(--color-text)">{song.title}</h3>
+          <h3 className="truncate font-semibold text-(--color-text)">
+            {song.title}
+          </h3>
 
           <div className="flex min-w-0 items-center text-sm text-(--color-text)/50">
             <span className="truncate">{song.artist}</span>
@@ -55,7 +75,7 @@ export default function PlayListSongsCard({ song }: PlayListSongsCardProps) {
         <button
           className="grid size-11 shrink-0 place-items-center rounded-full border border-white/10 bg-white/10 text-(--color-primary) backdrop-blur-2xl cursor-pointer"
           aria-label={IsSongPlaying ? "Pause song" : "Play song"}
-          onClick={() => dispatch(playSong(song))}
+          onClick={playSongHandler}
         >
           {IsSongPlaying ? (
             <Pause fill="currentColor" size={19} />

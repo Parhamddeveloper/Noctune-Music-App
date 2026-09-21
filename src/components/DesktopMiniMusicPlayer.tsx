@@ -17,8 +17,8 @@ import { useNavigate } from "react-router";
 import {
   changeLoop,
   changeVolume,
-  GoNextSong,
-  GoPreviousSong,
+  goNextSong,
+  goPreviousSong,
   MuteSong,
   seekTo,
   togglePlay,
@@ -71,7 +71,7 @@ export default function DesktopMiniMusicPlayer() {
 
           <button
             className="text-(--color-player-icons)/70 hover:text-(--color-primary)"
-            onClick={() => dispatch(GoPreviousSong())}
+            onClick={() => dispatch(goPreviousSong())}
           >
             <SkipBack size={22} fill="currentColor" />
           </button>
@@ -89,7 +89,7 @@ export default function DesktopMiniMusicPlayer() {
 
           <button
             className="text-(--color-player-icons)/70 hover:text-(--color-primary)"
-            onClick={() => dispatch(GoNextSong())}
+            onClick={() => dispatch(goNextSong())}
           >
             <SkipForward size={22} fill="currentColor" />
           </button>

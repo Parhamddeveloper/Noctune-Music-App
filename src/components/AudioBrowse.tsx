@@ -1,16 +1,21 @@
 import { Dot, Heart, ListPlus, Pause, Play } from "lucide-react";
 import type { Song } from "../types/songType";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { playSong } from "../redux/slices/playerSlice";
+import { playSong, setQueue } from "../redux/slices/playerSlice";
 import { toggleFavourite } from "../redux/slices/favouriteSlice";
 import type { Dispatch, SetStateAction } from "react";
+import { songs } from "../data/songs";
 
 interface AudioBrowseProps {
   Song: Song;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setSelectedSong: Dispatch<SetStateAction<Song | null>>
+  setSelectedSong: Dispatch<SetStateAction<Song | null>>;
 }
-export default function AudioBrowse({ Song,setIsModalOpen,setSelectedSong }: AudioBrowseProps) {
+export default function AudioBrowse({
+  Song,
+  setIsModalOpen,
+  setSelectedSong,
+}: AudioBrowseProps) {
   const { currentSong, isPlaying } = useAppSelector((state) => state.player);
   const { favouriteSongs } = useAppSelector((state) => state.favourites);
   const dispatch = useAppDispatch();
@@ -18,6 +23,14 @@ export default function AudioBrowse({ Song,setIsModalOpen,setSelectedSong }: Aud
     (favouriteSong) => favouriteSong === Song.id,
   );
   let IsSongPlaying = Song.id === currentSong?.id && isPlaying;
+  const playHandler = () => {
+    const builtInSongs = songs.map((song) => ({
+      id: song.id,
+      source: "built-in" as const,
+    }));
+    dispatch(setQueue(builtInSongs));
+    dispatch(playSong(Song));
+  };
   return (
     <div className="flex w-full justify-between items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-(--color-text)/8 p-3 backdrop-blur-3xl">
       <div className="flex min-w-0 items-center gap-3">
@@ -43,9 +56,9 @@ export default function AudioBrowse({ Song,setIsModalOpen,setSelectedSong }: Aud
         <button
           className="grid size-8 place-items-center text-(--color-text)/50"
           aria-label="Add song to playlist"
-          onClick={()=>{
-            setIsModalOpen(true)
-            setSelectedSong(Song)
+          onClick={() => {
+            setIsModalOpen(true);
+            setSelectedSong(Song);
           }}
         >
           <ListPlus size={19} />
@@ -65,7 +78,7 @@ export default function AudioBrowse({ Song,setIsModalOpen,setSelectedSong }: Aud
         <button
           className="grid size-11 shrink-0 place-items-center rounded-full border border-white/10 bg-white/10 text-(--color-primary) backdrop-blur-2xl cursor-pointer"
           aria-label={IsSongPlaying ? "Pause song" : "Play song"}
-          onClick={() => dispatch(playSong(Song))}
+          onClick={playHandler}
         >
           {IsSongPlaying ? (
             <Pause fill="currentColor" size={19} />

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import {
   clearSeek,
   getSongDuration,
-  GoNextSong,
+  goNextSong,
   setCurrentTime,
   songEnded,
 } from "../redux/slices/playerSlice";
@@ -60,7 +60,7 @@ export default function AudioPlayer() {
           dispatch(songEnded());
           audioref.current!.play();
         } else {
-          dispatch(GoNextSong());
+          dispatch(goNextSong());
           dispatch(clearSeek());
         }
       }}

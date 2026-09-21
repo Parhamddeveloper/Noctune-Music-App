@@ -18,8 +18,8 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import {
   changeLoop,
   changeVolume,
-  GoNextSong,
-  GoPreviousSong,
+  goNextSong,
+  goPreviousSong,
   MuteSong,
   seekTo,
   togglePlay,
@@ -118,7 +118,7 @@ export default function PlayerPage() {
                 </button>
                 <button
                   className="text-(--color-player-icons)/85 hover:bg-white/10 size-12 place-items-center rounded-full"
-                  onClick={() => dispatch(GoPreviousSong())}
+                  onClick={() => dispatch(goPreviousSong())}
                 >
                   <SkipBack fill="currentColor" />
                 </button>
@@ -132,7 +132,7 @@ export default function PlayerPage() {
                 <button
                   className="text-(--color-player-icons)/85 hover:bg-white/10 size-12 place-items-center rounded-full"
                   aria-label="Skip forward"
-                  onClick={() => dispatch(GoNextSong())}
+                  onClick={() => dispatch(goNextSong())}
                 >
                   <SkipForward fill="currentColor" />
                 </button>
