@@ -1,30 +1,9 @@
 import type { WallpaperDBType } from "../types/wallpaperDBType";
 import type { WallpaperType } from "../types/wallpaperType";
-
-export const openWallpaperDB = (): Promise<IDBDatabase> => {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open("noctuneDB", 4);
-    request.onerror = () => {
-      reject(request.error);
-    };
-    request.onsuccess = () => {
-      resolve(request.result);
-    };
-
-    request.onupgradeneeded = () => {
-      const db = request.result;
-      if (!db.objectStoreNames.contains("wallpapers")) {
-        db.createObjectStore("wallpapers", {
-          keyPath: "id",
-          autoIncrement: true,
-        });
-      }
-    };
-  });
-};
+import { openNoctuneDB } from "./noctuneDB";
 
 export const addWallpaper = async (wallpaper: Blob, name: string) => {
-  const db = await openWallpaperDB();
+  const db = await openNoctuneDB();
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");
@@ -47,7 +26,7 @@ export const addWallpaper = async (wallpaper: Blob, name: string) => {
 };
 
 export const getWallpapers = async (): Promise<WallpaperType[]> => {
-  const db = await openWallpaperDB();
+  const db = await openNoctuneDB();
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readonly");
@@ -75,7 +54,7 @@ export const getWallpapers = async (): Promise<WallpaperType[]> => {
 };
 
 export const deleteWallpaper = async (id: number) => {
-  const db = await openWallpaperDB();
+  const db = await openNoctuneDB();
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");

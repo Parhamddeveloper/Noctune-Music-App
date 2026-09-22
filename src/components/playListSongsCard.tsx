@@ -3,7 +3,6 @@ import type { Song } from "../types/songType";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { toggleFavourite } from "../redux/slices/favouriteSlice";
 import { playSong, setQueue } from "../redux/slices/playerSlice";
-import { songs } from "../data/songs";
 import { useParams } from "react-router";
 
 interface PlayListSongsCardProps {
@@ -35,7 +34,10 @@ export default function PlayListSongsCard({ song }: PlayListSongsCardProps) {
   let isSongFavourite = favouriteSongs.find(
     (favouriteSong) => favouriteSong === song.id,
   );
-  let IsSongPlaying = song.id === currentSong?.id && isPlaying;
+  let IsSongPlaying =
+    song.id === currentSong?.id &&
+    song.source === currentSong.source &&
+    isPlaying;
 
   return (
     <div className="flex w-full justify-between items-center gap-3 overflow-hidden rounded-2xl border border-(--color-text)/10 bg-(--color-text)/8 p-3 backdrop-blur-3xl">

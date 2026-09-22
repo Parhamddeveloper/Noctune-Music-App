@@ -1,29 +1,8 @@
 import type { ImportedMusicType } from "../types/ImportedMusicType";
-
-export const openCustomMusicsDB = (): Promise<IDBDatabase> => {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open("noctuneDB", 4);
-    request.onerror = () => {
-      reject(request.error);
-    };
-    request.onsuccess = () => {
-      resolve(request.result);
-    };
-
-    request.onupgradeneeded = () => {
-      const db = request.result;
-      if (!db.objectStoreNames.contains("importedMusics")) {
-        db.createObjectStore("importedMusics", {
-          keyPath: "id",
-          autoIncrement: true,
-        });
-      }
-    };
-  });
-};
+import { openNoctuneDB } from "./noctuneDB";
 
 export const getAllMusicsFromDB = async (): Promise<ImportedMusicType[]> => {
-  const db = await openCustomMusicsDB();
+  const db = await openNoctuneDB();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("importedMusics", "readonly");
     const store = transaction.objectStore("importedMusics");
@@ -40,7 +19,7 @@ export const getAllMusicsFromDB = async (): Promise<ImportedMusicType[]> => {
 export const getMusicByIDFromDB = async (
   id: number,
 ): Promise<ImportedMusicType | undefined> => {
-  const db = await openCustomMusicsDB();
+  const db = await openNoctuneDB();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("importedMusics", "readonly");
     const store = transaction.objectStore("importedMusics");
@@ -62,7 +41,7 @@ export const AddMusicToDB = async (
   audio: Blob,
   duration: number,
 ): Promise<number> => {
-  const db = await openCustomMusicsDB();
+  const db = await openNoctuneDB();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("importedMusics", "readwrite");
     const store = transaction.objectStore("importedMusics");
@@ -90,7 +69,7 @@ export const AddMusicToDB = async (
 };
 
 export const removeMusicFromDB = async (id: number): Promise<void> => {
-  const db = await openCustomMusicsDB();
+  const db = await openNoctuneDB();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("importedMusics", "readwrite");
     const store = transaction.objectStore("importedMusics");
@@ -108,7 +87,7 @@ export const removeMusicFromDB = async (id: number): Promise<void> => {
 export const updateMusicFromDB = async (
   music: ImportedMusicType,
 ): Promise<void> => {
-  const db = await openCustomMusicsDB();
+  const db = await openNoctuneDB();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("importedMusics", "readwrite");
     const store = transaction.objectStore("importedMusics");

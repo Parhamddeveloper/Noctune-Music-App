@@ -3,6 +3,7 @@ import type { Song } from "../types/songType";
 export const songs: Song[] = [
   {
     id: 1,
+    source : "built-in",
     title: "french christmas patapan intro",
     artist: "pixabay",
     cover: "/386-400x400.jpg",
@@ -12,6 +13,7 @@ export const songs: Song[] = [
   },
   {
     id: 2,
+    source : "built-in",
     title: "black box legendary",
     artist: "pixabay",
     cover: "/586-400x400.jpg",
@@ -21,6 +23,7 @@ export const songs: Song[] = [
   },
   {
     id: 3,
+    source : "built-in",
     title: "chinese flute on london bridge",
     artist: "pixabay",
     cover: "/386-400x400.jpg",
@@ -30,6 +33,7 @@ export const songs: Song[] = [
   },
   {
     id: 4,
+    source : "built-in",
     title: "christmas intro little town of bethlehem",
     artist: "pixabay",
     cover: "/586-400x400.jpg",
@@ -39,6 +43,7 @@ export const songs: Song[] = [
   },
   {
     id: 5,
+    source : "built-in",
     title: "green sky",
     artist: "pixabay",
     cover: "/386-400x400.jpg",
@@ -48,6 +53,7 @@ export const songs: Song[] = [
   },
     {
     id:6,
+    source : "built-in",
     title: "guitar mellow beat",
     artist: "pixabay",
     cover: "/386-400x400.jpg",

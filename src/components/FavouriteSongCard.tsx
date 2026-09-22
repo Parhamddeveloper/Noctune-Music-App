@@ -18,7 +18,9 @@ export default function FavouriteSongCard({ id }: { id: number }) {
     dispatch(setQueue(builtInSongs));
     dispatch(playSong(song));
   };
-  let IsSongPlaying = song.id === currentSong?.id && isPlaying;
+  let IsSongPlaying =     song.id === currentSong?.id &&
+    song.source === currentSong.source &&
+    isPlaying;
   return (
     <div className="flex w-full justify-between items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-(--color-text)/8 p-3 backdrop-blur-3xl">
       <div className="flex min-w-0 items-center gap-3">

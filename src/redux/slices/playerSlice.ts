@@ -7,7 +7,6 @@ import type { Song } from "../../types/songType";
 import { songs } from "../../data/songs";
 import { getImportedMusicForPlay } from "./importedMusicSlice";
 import type { RootState } from "../store";
-import { getMusicByIDFromDB } from "../../utils/customMusicsDB";
 
 type QueueItem = {
   id: number;
@@ -53,10 +52,11 @@ export const goPreviousSong = createAsyncThunk<
   const state = getState();
   const currentSong = state.player.currentSong;
   const queue = state.player.queue;
-  if (queue.length === 0) return;
+  if (queue.length <= 1) return;
+
   if (!currentSong) return;
   const currentSongIndex = queue.findIndex(
-    (song) => currentSong.id === song.id,
+    (song) => currentSong.id === song.id && currentSong.source === song.source,
   );
   if (currentSongIndex === -1) return;
   const previousSongIndex =
@@ -77,13 +77,32 @@ export const goNextSong = createAsyncThunk<void, void, { state: RootState }>(
   "player/goNextSong",
   async (_, { getState, dispatch }) => {
     const currentSong = getState().player.currentSong;
+    const isShuffled = getState().player.isShuffled;
     const queue = getState().player.queue;
-    if (queue.length === -1) return;
+    if (queue.length <= 1) return;
     if (!currentSong) return;
     const currentSongIndex = queue.findIndex(
-      (song) => song.id === currentSong.id,
+      (song) =>
+        currentSong.id === song.id && currentSong.source === song.source,
     );
-    if (currentSongIndex === queue.length - 1) return;
+    if (isShuffled) {
+      if (queue.length === 1) return;
+      let randomMusicIndex = Math.floor(Math.random() * queue.length);
+      while (randomMusicIndex === currentSongIndex)
+        randomMusicIndex = Math.random() * queue.length;
+      const randomMusicQueue = queue[randomMusicIndex];
+      if (randomMusicQueue.source === "built-in") {
+        const randomMusicItem = songs.find(
+          (music) => music.id === randomMusicQueue.id,
+        );
+        if (!randomMusicItem) return;
+        dispatch(playSong(randomMusicItem));
+        return;
+      } else {
+        dispatch(getImportedMusicForPlay(randomMusicQueue.id));
+        return;
+      }
+    }
     const nextSongIndex =
       currentSongIndex === queue.length - 1 ? 0 : currentSongIndex + 1;
     const nextQueueItem = queue[nextSongIndex];
@@ -101,7 +120,10 @@ const playerSlice = createSlice({
   initialState,
   reducers: {
     playSong: (state, action: PayloadAction<Song>) => {
-      if (state.currentSong?.id === action.payload.id) {
+      if (
+        state.currentSong?.id === action.payload.id &&
+        state.currentSong.source === action.payload.source
+      ) {
         state.isPlaying = !state.isPlaying;
         return;
       }

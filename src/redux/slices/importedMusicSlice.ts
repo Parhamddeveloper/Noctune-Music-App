@@ -63,6 +63,7 @@ export const getImportedMusicForPlay = createAsyncThunk(
 
     const song: Song = {
       id: music.id,
+      source : "imported",
       title: music.name,
       artist: music.artist,
       cover: music.cover ? URL.createObjectURL(music.cover) : "",

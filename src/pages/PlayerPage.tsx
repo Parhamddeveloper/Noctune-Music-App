@@ -41,7 +41,7 @@ export default function PlayerPage() {
   } = useAppSelector((state) => state.player);
   const { favouriteSongs } = useAppSelector((state) => state.favourites);
   let isSongFavourite = favouriteSongs.find(
-    (favouriteSong) => favouriteSong === currentSong?.id,
+    (favouriteSong) => favouriteSong === currentSong?.id && currentSong.source === "built-in",
   );
   const dispatch = useAppDispatch();
   const changeVolumeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +87,7 @@ export default function PlayerPage() {
                 <button
                   className={`shrink-0 border border-white/10 bg-white/8 backdrop-blur-2xl size-11 rounded-full place-items-center ${isSongFavourite ? "text-(--color-primary)" : "text-white/50"}`}
                   aria-label="make song favourite"
+                  disabled={currentSong.source === "imported"}
                   onClick={() => dispatch(toggleFavourite(currentSong.id))}
                 >
                   <Heart

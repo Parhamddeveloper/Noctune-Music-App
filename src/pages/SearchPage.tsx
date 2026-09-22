@@ -17,7 +17,7 @@ export default function SearchPage() {
     const searchableText = `
       ${song.title.toLowerCase()}
       ${song.artist.toLowerCase()}
-      ${song.genre.toLowerCase()}
+      ${song.genre?.toLowerCase()}
     `;
     const matchesSearch = searchableText.includes(trimmedSearchQuery);
     const matchesGenre =

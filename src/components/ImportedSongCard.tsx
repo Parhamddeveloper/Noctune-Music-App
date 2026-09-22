@@ -1,6 +1,6 @@
 import { Dot, Pause, Play } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { playSong, setQueue } from "../redux/slices/playerSlice";
+import { setQueue } from "../redux/slices/playerSlice";
 import type { ImportedMusicStateType } from "../types/ImportedMusicType";
 import { formatTime } from "../utils/formatTime";
 import {

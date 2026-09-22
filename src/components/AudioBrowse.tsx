@@ -22,7 +22,9 @@ export default function AudioBrowse({
   let isSongFavourite = favouriteSongs.find(
     (favouriteSong) => favouriteSong === Song.id,
   );
-  let IsSongPlaying = Song.id === currentSong?.id && isPlaying;
+  let IsSongPlaying =     Song.id === currentSong?.id &&
+    Song.source === currentSong.source &&
+    isPlaying;;
   const playHandler = () => {
     const builtInSongs = songs.map((song) => ({
       id: song.id,

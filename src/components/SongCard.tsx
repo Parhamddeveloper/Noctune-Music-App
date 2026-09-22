@@ -13,11 +13,17 @@ export default function SongCard({ song }: MusicCardProps) {
   const dispatch = useAppDispatch();
   const { currentSong, isPlaying } = useAppSelector((state) => state.player);
   const favourites = useAppSelector((state) => state.favourites);
-  const IsSongPlaying = currentSong?.id === song.id && isPlaying;
+  const IsSongPlaying =
+    currentSong?.id === song.id &&
+    currentSong.source === song.source &&
+    isPlaying;
   const IsSongFavourite = favourites.favouriteSongs.includes(song.id);
   const PlaySongHandler = () => {
-    const builtInSongs = songs.map((song)=>({id:song.id,source:"built-in" as const}))
-    dispatch(setQueue(builtInSongs))
+    const builtInSongs = songs.map((song) => ({
+      id: song.id,
+      source: "built-in" as const,
+    }));
+    dispatch(setQueue(builtInSongs));
     dispatch(playSong(song));
   };
   const toggleFavouriteHandler = () => {
@@ -55,7 +61,9 @@ export default function SongCard({ song }: MusicCardProps) {
         </h2>
         <div className="mt-auto">
           <p className="text-(--color-text)/50 text-sm">{song.artist}</p>
-          <span className="text-xs  text-(--color-primary)/80">{song.genre}</span>
+          <span className="text-xs  text-(--color-primary)/80">
+            {song.genre}
+          </span>
         </div>
       </div>
     </div>
