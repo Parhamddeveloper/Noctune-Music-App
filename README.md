@@ -6,7 +6,7 @@ A modern and customizable music player built with React and TypeScript, featurin
 
 ## 💻 Live Demo
 
-🔗 **[View Live Project](https://ecohome-react.vercel.app/)**
+🔗 **[View Live Project](https://noctune-music-app.vercel.app/)**
 
 ---
 
