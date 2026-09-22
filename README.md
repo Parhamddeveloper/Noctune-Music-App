@@ -1,6 +1,8 @@
 # 🎵 Noctune - Modern Music Player
 
-A modern and customizable music player built with React and TypeScript, featuring local MP3 imports, persistent storage, playback queues, custom wallpapers, and more.
+A modern, responsive, and customizable music player built with React and TypeScript.
+
+Noctune supports built-in tracks as well as local MP3 imports, persistent browser storage, playback queues, custom wallpapers, metadata extraction, drag-and-drop imports, and more.
 
 ---
 
@@ -13,13 +15,16 @@ A modern and customizable music player built with React and TypeScript, featurin
 ## ⚡ Highlights
 
 - 🎵 Import and play local MP3 files
+- 🖱️ Drag & drop support for music and wallpapers
 - 💾 Persistent local storage using IndexedDB
-- 🖼️ Automatic album cover and metadata extraction
+- 🖼️ Automatic album artwork and metadata extraction
 - 🎨 Custom wallpaper support
 - 🔀 Queue-based playback with Shuffle, Next, and Previous
 - 🔁 Multiple loop modes
 - 🔎 Search imported music by title, artist, or album
-- 📱 Responsive modern interface
+- ❤️ Favourite built-in tracks
+- 📱 Responsive interface for desktop, tablet, and mobile
+- 🎧 Support for both built-in and imported music
 
 ---
 
@@ -31,99 +36,246 @@ A modern and customizable music player built with React and TypeScript, featurin
 - Tailwind CSS
 - IndexedDB
 - music-metadata
+- React Router
+- Lucide React
 - Vite
 
 ---
 
 ## ✨ App Features
 
-- Local Music Import: Import MP3 files directly from your device and keep them available between sessions.
+### 🎵 Local Music Import
 
-- Metadata Extraction: Automatically extracts song title, artist, album, duration, and embedded album artwork from imported MP3 files.
+Import MP3 files directly from your device using the file picker or drag and drop.
 
-- Persistent Music Library: Imported audio files and their metadata are stored locally using IndexedDB.
+Imported tracks remain available between sessions without requiring a server or external database.
 
-- Music Player: Play, pause, seek, control volume, mute, and manage playback directly from the player.
+### 🖼️ Automatic Metadata Extraction
 
-- Playback Queue: Each music collection creates its own playback queue for Next and Previous navigation.
+Noctune uses `music-metadata` to automatically extract available information from imported MP3 files, including:
 
-- Shuffle Mode: Play random tracks from the active queue while avoiding the currently playing song.
+- Song title
+- Artist
+- Album
+- Duration
+- Embedded album artwork
 
-- Loop Modes: Control how tracks repeat using the available playback loop modes.
+Missing metadata is handled with fallback values when necessary.
 
-- Built-in & Imported Music: Supports both bundled tracks and user-imported music with separate source identification.
+### 💾 Persistent Music Library
 
-- Music Search: Search imported tracks by song title, artist, or album.
+Imported audio files, album artwork, and metadata are stored locally using IndexedDB.
 
-- Delete Imported Music: Remove imported tracks permanently from the local music library.
+This allows imported music to remain available after refreshing or reopening the application.
 
-- Favourites: Add built-in songs to your favourites collection.
+### 🎧 Music Player
 
-- Custom Wallpapers: Personalize the app with custom wallpapers stored persistently in IndexedDB.
+The player includes:
 
-- Persistent Local Experience: Music and wallpaper data remain available after refreshing or reopening the app.
+- Play and pause
+- Seek controls
+- Volume control
+- Mute
+- Next and Previous
+- Shuffle
+- Loop modes
+- Current track information
+- Album artwork
+
+### 📋 Playback Queue
+
+Noctune creates a playback queue based on the collection the user is currently listening to.
+
+Next, Previous, and Shuffle operate on the active queue, allowing playback to continue naturally through the selected music collection.
+
+### 🔀 Shuffle Mode
+
+Shuffle selects a random track from the active playback queue while avoiding immediately selecting the currently playing track.
+
+### 🔁 Loop Modes
+
+Multiple loop modes provide control over how the current track repeats during playback.
+
+### 🎶 Built-in & Imported Music
+
+Noctune supports both bundled music and user-imported tracks.
+
+Each song includes a source identifier, allowing the player and queue system to distinguish between built-in and imported tracks even when their numeric IDs are the same.
+
+### 🔎 Music Search
+
+Search imported music using:
+
+- Song title
+- Artist
+- Album
+
+Search is case-insensitive and updates the displayed results dynamically.
+
+### 🗑️ Imported Music Management
+
+Imported tracks can be permanently removed from the local music library.
+
+Changes are synchronized with IndexedDB so deleted tracks stay removed after refreshing the application.
+
+### ❤️ Favourites
+
+Built-in tracks can be added to a favourites collection for quick access.
+
+### 🎨 Custom Wallpapers
+
+Users can import their own images and use them as application wallpapers.
+
+Wallpaper features include:
+
+- Image upload
+- Drag and drop
+- Persistent IndexedDB storage
+- Wallpaper selection
+- Wallpaper deletion
+- Restore default wallpaper
+
+### 🖱️ Drag & Drop
+
+Noctune supports drag-and-drop importing for:
+
+- MP3 files
+- Custom wallpaper images
+
+Visual drag states provide feedback while files are being dropped into the application.
+
+### 📱 Responsive Design
+
+The interface adapts across desktop, tablet, and mobile screen sizes.
+
+The responsive layout includes adaptive navigation and a mobile-friendly Profile interface for managing themes, wallpapers, and imported music.
+
+### 🌙 Theme Customization
+
+Noctune includes theme customization options that allow users to personalize the appearance of the application.
+
+### 🚫 Empty & Search States
+
+The interface provides clear feedback when:
+
+- No music has been imported
+- An imported music search has no matching results
+- No custom wallpapers have been added
 
 ---
 
 ## 🧠 How Local Music Works
 
-When a user imports an MP3 file, Noctune extracts its metadata and stores the original audio file locally in IndexedDB.
+When a user imports an MP3 file, Noctune reads the file locally, extracts its metadata, and stores the original audio data inside IndexedDB.
 
-The playback flow looks like this:
+The main flow looks like this:
 
-File
-→ Metadata Extraction
-→ IndexedDB
-→ Redux
-→ Playback Queue
-→ Player
+```text
+MP3 File
+    ↓
+Metadata Extraction
+    ↓
+IndexedDB
+    ↓
+Redux
+    ↓
+Playback Queue
+    ↓
+Player
+```
 
-Large binary data such as audio files and album artwork are kept inside IndexedDB, while Redux manages the lightweight application state used by the interface.
+Large binary data such as audio files and embedded album artwork are kept inside IndexedDB.
+
+Redux manages the lightweight application state required by the interface and player.
+
+When an imported track needs to be played, its audio Blob is retrieved from IndexedDB and converted into a temporary object URL that can be used by the browser's audio player.
+
+This keeps large binary files out of Redux while still allowing the interface to manage imported tracks efficiently.
+
+---
+
+## 💾 Local Storage Architecture
+
+Noctune uses a single IndexedDB database for persistent user content.
+
+The database contains separate object stores for:
+
+```text
+noctuneDB
+├── importedMusics
+└── wallpapers
+```
+
+This data stays entirely inside the user's browser and does not require a backend server.
 
 ---
 
 ## ⬇️ How To Install?
 
-If you want to install this app and run it locally, make sure you have Node.js installed on your machine and follow these steps:
+If you want to run Noctune locally, make sure you have Node.js installed.
 
 ### 1. Clone the repository
 
-`git clone https://github.com/Parhamddeveloper/Noctune-Music-App.git`
+```bash
+git clone https://github.com/Parhamddeveloper/Noctune-Music-App.git
+```
 
 ### 2. Navigate to the project directory
 
-`cd noctune`
+```bash
+cd Noctune-Music-App
+```
 
 ### 3. Install dependencies
 
-`npm install`
+```bash
+npm install
+```
 
-### 4. Run the App
+### 4. Run the app
 
-`npm run dev`
+```bash
+npm run dev
+```
 
-You can open the app using this address:
+Then open:
 
-`http://localhost:5173/`
+```text
+http://localhost:5173/
+```
 
 ---
 
-Note: If you want to build the App, after installing dependencies, follow these steps:
+## 🏗️ Build & Preview
 
-### 1. Build the App
+To create a production build:
 
-`npm run build`
+```bash
+npm run build
+```
 
-### 2. Preview the App
+To preview the production build locally:
 
-`npm run preview`
+```bash
+npm run preview
+```
 
-You can preview the production build using:
+Then open:
 
-`http://localhost:4173/`
+```text
+http://localhost:4173/
+```
+
+---
+
+## 🔐 Privacy
+
+Imported music and custom wallpapers are stored locally in the user's browser using IndexedDB.
+
+Noctune does not upload imported music files or wallpapers to an external server.
 
 ---
 
 ## Credits
 
-This app was made and designed by Parham Daneshnejad with love ❤️❤️
+This app was made and designed by **Parham Daneshnejad** with love ❤️❤️

@@ -48,7 +48,7 @@ export default function ThemeSect() {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 2xl:grid-cols-3 gap-3">
         {Themes.map((themeItem) => (
           <div
             className={`py-2 px-1.5 border transition rounded-2xl ${themeItem.name === theme ? "border-(--color-surface)/70" : "border-(--color-text)/10"}`}

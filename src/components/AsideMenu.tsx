@@ -14,8 +14,8 @@ export default function AsideMenu() {
   const { playLists } = useAppSelector((state) => state.playlists);
   const latestFourPlayLists = playLists.slice(0, 4).reverse();
   return (
-    <aside className="hidden fixed lg:block left-0 top-0 w-70 h-full text-(--color-text)  p-5 z-99 ">
-      <div className="border-white/10 border bg-(--color-text)/10 backdrop-blur-lg h-full rounded-2xl flex flex-col  py-4 px-4">
+    <aside className="hidden fixed lg:block left-0 top-0 w-70 h-dvh text-(--color-text)  p-5 z-99 ">
+      <div className="border-white/10 border bg-(--color-text)/10 backdrop-blur-lg h-full rounded-2xl flex flex-col  py-4 px-4 overflow-auto">
         <div className="flex items-center gap-x-2">
           <img src="App logo.png" alt="Noctune logo" className="size-12" />
           <span className="text-2xl">Noctune</span>
@@ -50,7 +50,7 @@ export default function AsideMenu() {
             </button>
           </Link>
         </div>
-        <div className="mt-4 flex flex-col gap-y-3">
+        <div className="mt-4 flex flex-col gap-y-3 min-h-20 overflow-y-auto">
           {latestFourPlayLists.map((playListItem) => (
             <PlayListCard
               key={playListItem.id}

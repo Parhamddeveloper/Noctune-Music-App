@@ -6,6 +6,7 @@ import {
   deleteWallpaper,
   setDefaultWallpaper,
 } from "../redux/slices/wallpaperSlice";
+import React, { useId, useRef, useState } from "react";
 export default function WallpaperSect() {
   const currentWallpaper = useAppSelector(
     (state) => state.wallpaper.currentWallpaper,
@@ -15,16 +16,54 @@ export default function WallpaperSect() {
   );
   const wallpapers = useAppSelector((state) => state.wallpaper.wallpapers);
   const dispatch = useAppDispatch();
-  const uploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const result = await dispatch(
-      addNewWallpaper({ wallpaper: file, name: file.name }),
-    ).unwrap();
-    dispatch(changeWallpaper(result));
+  const [isDragging, setIsDragging] = useState(false);
+  const dragCounter = useRef(0);
+  const wallpaperInputId = useId();
+const processWallpaperHandler = async (file: File) => {
+  const isFileImage = file.type.startsWith("image/");
+
+  if (!isFileImage) return;
+
+  await dispatch(
+    addNewWallpaper({
+      wallpaper: file,
+      name: file.name,
+    }),
+  ).unwrap();
+};
+  const dragStartedHandler = () => {
+    dragCounter.current += 1;
+
+    if (dragCounter.current === 1) {
+      setIsDragging(true);
+    }
   };
+  const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+  const dropHandler = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    dragCounter.current = 0;
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+    await processWallpaperHandler(file);
+  };
+  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    dragCounter.current -= 1;
+    if (dragCounter.current === 0) {
+      setIsDragging(false);
+    }
+  };
+const uploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  await processWallpaperHandler(file);
+};
   return (
     <>
+    
       <div className="flex flex-col text-(--color-text) gap-y-3 backdrop-blur-2xl bg-(--color-text)/8 rounded-2xl p-5">
         <div className="flex items-center gap-x-3">
           <Wallpaper />
@@ -34,7 +73,18 @@ export default function WallpaperSect() {
           </div>
         </div>
         <div>
-          <div className="w-full relative">
+          <div
+            className="w-full relative"
+            onDragEnter={dragStartedHandler}
+            onDragOver={dragOverHandler}
+            onDragLeave={dragLeaveHandler}
+            onDrop={dropHandler}
+          >
+            {isDragging && (
+              <div className="absolute h-full w-full flex aspect-video justify-center items-center bg-(--color-text)/80 rounded-lg border border-(--color-surface) cursor-pointer">
+                drop your image
+              </div>
+            )}
             {currentWallpaper ? (
               <>
                 <div className="aspect-video overflow-hidden rounded-2xl">
@@ -52,15 +102,20 @@ export default function WallpaperSect() {
               </>
             ) : (
               <>
-                <div >
-                  <label className="flex aspect-video justify-center items-center bg-(--color-text)/10 rounded-lg border border-(--color-surface) cursor-pointer" htmlFor="wallpaper-upload">No image selected</label>
+                <div>
+                  <label
+                    className="flex aspect-video justify-center items-center bg-(--color-text)/10 rounded-lg border border-(--color-surface) cursor-pointer"
+                    htmlFor={wallpaperInputId}
+                  >
+                    {!isDragging && "No image selected"}
+                  </label>
                 </div>
               </>
             )}
           </div>
           <div className="flex gap-x-3 mt-3">
             <input
-              id="wallpaper-upload"
+              id={wallpaperInputId}
               type="file"
               accept="image/*"
               className="hidden"
@@ -68,7 +123,7 @@ export default function WallpaperSect() {
             />
 
             <label
-              htmlFor="wallpaper-upload"
+              htmlFor={wallpaperInputId}
               className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3"
             >
               Add wallpaper

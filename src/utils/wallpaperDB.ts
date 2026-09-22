@@ -2,7 +2,7 @@ import type { WallpaperDBType } from "../types/wallpaperDBType";
 import type { WallpaperType } from "../types/wallpaperType";
 import { openNoctuneDB } from "./noctuneDB";
 
-export const addWallpaper = async (wallpaper: Blob, name: string) => {
+export const addWallpaperToDB = async (wallpaper: Blob, name: string) => {
   const db = await openNoctuneDB();
 
   return new Promise((resolve, reject) => {
@@ -53,7 +53,7 @@ export const getWallpapers = async (): Promise<WallpaperType[]> => {
   });
 };
 
-export const deleteWallpaper = async (id: number) => {
+export const deleteWallpaperFromDB = async (id: number) => {
   const db = await openNoctuneDB();
 
   return new Promise((resolve, reject) => {

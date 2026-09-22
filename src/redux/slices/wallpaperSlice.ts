@@ -4,7 +4,7 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 import type { WallpaperType } from "../../types/wallpaperType";
-import { addWallpaper, getWallpapers } from "../../utils/wallpaperDB";
+import { addWallpaperToDB, deleteWallpaperFromDB, getWallpapers } from "../../utils/wallpaperDB";
 
 type WallpaperState = {
   currentWallpaper: string | null;
@@ -30,7 +30,7 @@ export const loadWallpapers = createAsyncThunk(
 export const addNewWallpaper = createAsyncThunk(
   "wallpaper/addNewWallpaper",
   async ({ wallpaper, name }: { wallpaper: Blob; name: string }) => {
-    const id = await addWallpaper(wallpaper, name);
+    const id = await addWallpaperToDB(wallpaper, name);
 
     return {
       id: Number(id),
@@ -42,6 +42,7 @@ export const addNewWallpaper = createAsyncThunk(
 export const deleteWallpaper = createAsyncThunk(
   "wallpaper/deleteWallpaper",
   async (id: number) => {
+    await deleteWallpaperFromDB(id)
     return id;
   },
 );

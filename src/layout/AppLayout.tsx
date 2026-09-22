@@ -22,7 +22,7 @@ export default function AppLayout() {
   return (
     <>
       <div
-        className={`min-h-screen overflow-hidden relative app-theme-${theme} bg-(--color-background) transition-colors`}
+        className={`min-h-screen overflow-x-hidden relative app-theme-${theme} bg-(--color-background) transition-colors`}
       >
         {currentWallpaper && (
           <div
@@ -33,7 +33,7 @@ export default function AppLayout() {
         <AsideMenu />
         <div className="absolute h-80 w-80 -top-32 -left-32 rounded-full bg-(--color-surface)/30 blur-[100px] z-0" />
         <div className="absolute h-72 w-72 -bottom-32 -right-32 rounded-full bg-(--color-surface)/30 blur-[100px] z-0" />
-        <main className="relative min-h-screen overflow-hidden px-5 pb-45 lg:ml-70">
+        <main className="relative min-h-dvh overflow-hidden px-5 pb-45 lg:ml-70">
           <div className="relative z-10">
             <Outlet />
           </div>
