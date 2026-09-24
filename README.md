@@ -1,5 +1,7 @@
 # 🎵 Noctune - Modern Music Player
 
+![Noctune music player cover](/readMe%20attachments/hero.png)
+
 A modern, responsive, and customizable music player built with React and TypeScript.
 
 Noctune supports built-in tracks as well as local MP3 imports, persistent browser storage, playback queues, custom wallpapers, metadata extraction, drag-and-drop imports, and more.
@@ -45,6 +47,9 @@ Noctune supports built-in tracks as well as local MP3 imports, persistent browse
 ## ✨ App Features
 
 ### 🎵 Local Music Import
+
+![import music demo](/readMe%20attachments/import%20music%20demo.gif)
+
 
 Import MP3 files directly from your device using the file picker or drag and drop.
 
@@ -121,6 +126,7 @@ Changes are synchronized with IndexedDB so deleted tracks stay removed after ref
 ### ❤️ Favourites
 
 Built-in tracks can be added to a favourites collection for quick access.
+![toggle favourite demo](/readMe%20attachments/toggle%20favourite%20demo.gif)
 
 ### 🎨 Custom Wallpapers
 
@@ -135,6 +141,13 @@ Wallpaper features include:
 - Wallpaper deletion
 - Restore default wallpaper
 
+![change wallpaper demo](/readMe%20attachments/change%20wallpaper%20demo.gif)
+
+### 🌙 Theme Customization
+
+Noctune includes theme customization options that allow users to personalize the appearance of the application.
+![change theme demo](/readMe%20attachments/change%20theme%20demo.gif)
+
 ### 🖱️ Drag & Drop
 
 Noctune supports drag-and-drop importing for:
@@ -144,25 +157,12 @@ Noctune supports drag-and-drop importing for:
 
 Visual drag states provide feedback while files are being dropped into the application.
 
+
 ### 📱 Responsive Design
 
 The interface adapts across desktop, tablet, and mobile screen sizes.
 
 The responsive layout includes adaptive navigation and a mobile-friendly Profile interface for managing themes, wallpapers, and imported music.
-
-### 🌙 Theme Customization
-
-Noctune includes theme customization options that allow users to personalize the appearance of the application.
-
-### 🚫 Empty & Search States
-
-The interface provides clear feedback when:
-
-- No music has been imported
-- An imported music search has no matching results
-- No custom wallpapers have been added
-
----
 
 ## 🧠 How Local Music Works
 
