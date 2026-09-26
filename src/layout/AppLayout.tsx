@@ -7,6 +7,7 @@ import AsideMenu from "../components/AsideMenu";
 import DesktopMiniMusicPlayer from "../components/DesktopMiniMusicPlayer";
 import { loadWallpapers } from "../redux/slices/wallpaperSlice";
 import { useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 
 export default function AppLayout() {
   const { currentSong } = useAppSelector((state) => state.player);
@@ -37,15 +38,19 @@ export default function AppLayout() {
           <div className="relative z-10">
             <Outlet />
           </div>
-          {currentSong && location.pathname !== "/player" && (
-            <AudioPlayerController />
-          )}
+          <AnimatePresence>
+            {currentSong && location.pathname !== "/player" && (
+              <AudioPlayerController />
+            )}
+          </AnimatePresence>
           <AudioPlayer />
           <BottomNav />
         </main>
-        {currentSong && location.pathname !== "/player" && (
-          <DesktopMiniMusicPlayer />
-        )}
+        <AnimatePresence>
+          {currentSong && location.pathname !== "/player" && (
+            <DesktopMiniMusicPlayer />
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

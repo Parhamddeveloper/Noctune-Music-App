@@ -24,7 +24,7 @@ import {
   togglePlay,
   toggleShuffle,
 } from "../redux/slices/playerSlice";
-
+import { motion } from "framer-motion";
 export default function DesktopMiniMusicPlayer() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -45,7 +45,22 @@ export default function DesktopMiniMusicPlayer() {
   if (!currentSong) return null;
 
   return (
-    <div className="fixed bottom-5 left-[276px] right-5 z-50 hidden h-24 items-center gap-6 rounded-2xl border border-white/10 bg-(--color-text)/5 px-5 text-(--color-text) shadow-2xl backdrop-blur-xl lg:flex">
+    <motion.div
+      initial={{
+        y: 100,
+        opacity: 0,
+      }}
+      animate={{
+        y: [100, -8, 0],
+        opacity: [0, 1, 1],
+      }}
+      transition={{
+        duration: 0.85,
+        times: [0, 0.35, 1],
+        ease: "easeOut",
+      }}
+      className="fixed bottom-5 left-[276px] right-5 z-50 hidden h-24 items-center gap-6 rounded-2xl border border-white/10 bg-(--color-text)/5 px-5 text-(--color-text) shadow-2xl backdrop-blur-xl lg:flex"
+    >
       <div className="flex min-w-0 w-64 items-center gap-3">
         <img
           src={currentSong.cover}
@@ -55,7 +70,9 @@ export default function DesktopMiniMusicPlayer() {
 
         <div className="min-w-0">
           <p className="truncate font-medium">{currentSong.title}</p>
-          <p className="truncate text-sm text-(--color-text)/50">{currentSong.artist}</p>
+          <p className="truncate text-sm text-(--color-text)/50">
+            {currentSong.artist}
+          </p>
         </div>
       </div>
 
@@ -119,7 +136,7 @@ export default function DesktopMiniMusicPlayer() {
             max={duration}
             value={currentTime}
             onChange={(e) => dispatch(seekTo(e.target.value))}
-            className="song-range min-w-0 flex-1 accent-(--color-primary)" 
+            className="song-range min-w-0 flex-1 accent-(--color-primary)"
           />
           <span className="w-10 text-xs text-(--color-text)/50">
             {formatTime(duration)}
@@ -128,7 +145,10 @@ export default function DesktopMiniMusicPlayer() {
       </div>
 
       <div className="flex w-56 items-center justify-end gap-3">
-        <button className="text-(--color-player-icons)/50" onClick={() => dispatch(MuteSong())}>
+        <button
+          className="text-(--color-player-icons)/50"
+          onClick={() => dispatch(MuteSong())}
+        >
           {isMuted ? (
             <VolumeOff size={19} color="#fb2c36" />
           ) : (
@@ -155,6 +175,6 @@ export default function DesktopMiniMusicPlayer() {
           <Maximize2 size={20} />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
